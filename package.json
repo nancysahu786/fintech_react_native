@@ -15,13 +15,16 @@
   "dependencies": {
     "@clerk/clerk-expo": "^1.2.5",
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-menu/menu": "^1.1.2",
     "@react-navigation/drawer": "^6.7.0",
     "@react-navigation/native": "^6.1.17",
+    "@tanstack/react-query": "^5.50.1",
     "expo": "~51.0.17",
     "expo-asset": "~10.0.10",
     "expo-av": "~14.0.6",
+    "expo-blur": "~13.0.2",
     "expo-dev-client": "~4.0.19",
     "expo-font": "~12.0.7",
     "expo-linking": "~6.3.1",
@@ -44,9 +47,7 @@
     "react-native-screens": "^3.31.1",
     "react-native-web": "~0.19.10",
     "zeego": "^1.10.0",
-    "zustand": "^4.5.4",
-    "@react-native-async-storage/async-storage": "1.23.1",
-    "expo-blur": "~13.0.2"
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

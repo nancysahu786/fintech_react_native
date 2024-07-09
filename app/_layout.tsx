@@ -5,7 +5,7 @@ import { router, Stack, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
 import { useColorScheme } from '@/components/useColorScheme';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BackHandler, TouchableOpacity } from 'react-native';
@@ -14,6 +14,9 @@ import { StatusBar } from 'expo-status-bar';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import * as SecureStore from 'expo-secure-store';
 const CLERK_PUBLISHER_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
+const queryClient = new QueryClient();
+
 
 const tokenCache = {
   async getToken(key: string) {
@@ -131,6 +134,25 @@ const InitialLayout = () => {
       }} />
 
 <Stack.Screen name="(authenticated)/(tabs)" options={{ headerShown:false }} />
+<Stack.Screen name="(authenticated)/crypto/[id]" options={{ 
+  title:'',
+  headerLeft: () => (
+    <TouchableOpacity onPress={Router.back}>
+      <Ionicons name="arrow-back" size={30} color={'black'} />
+    </TouchableOpacity>),
+    headerTransparent:true,
+    headerLargeTitle:true,
+    headerRight: () => (
+      <View style={{flexDirection:'row',gap:10}}>
+ <TouchableOpacity onPress={Router.back}>
+      <Ionicons name="notifications-outline" size={30} color={'black'} />
+    </TouchableOpacity>
+    <TouchableOpacity onPress={Router.back}>
+      <Ionicons name="star-outline" size={30} color={'black'} />
+    </TouchableOpacity>
+      </View>
+    )
+ }} />
     </Stack>
   )
 
@@ -139,10 +161,12 @@ const InitialLayout = () => {
 const RootLayoutNav = () => {
   return (
     <ClerkProvider publishableKey={CLERK_PUBLISHER_KEY!} tokenCache={tokenCache}>
+      <QueryClientProvider client={queryClient}>
     <GestureHandlerRootView>
       <StatusBar style='light' />
       <InitialLayout />
     </GestureHandlerRootView>
+    </QueryClientProvider>
     </ClerkProvider>
 
   );

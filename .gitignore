@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules/
-
+.env
 android/
 ios/
 # Expo
