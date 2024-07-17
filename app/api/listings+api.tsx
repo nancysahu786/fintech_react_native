@@ -1,6 +1,6 @@
 // import { ExpoRequest, ExpoResponse } from 'expo-router/server';
 
-const API_KEY = process.env.CRYPTO_API_KEY;
+// const API_KEY = process.env.CRYPTO_API_KEY;
 
 export async function GET(request: Request) {
   // const limit = request.expoUrl.searchParams.get('limit') || 5;

@@ -35,7 +35,14 @@
         }
       ],
       "expo-asset",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-local-authentication",
+        {
+          "faceIdPermission": "Allow ${PRODUCT_NAME} to use Face ID"
+        }
+      ]
+      
     ],
     "experiments": {
       "typedRoutes": true

@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
+import { Link, useRouter } from "expo-router";
 import { View, Text, StyleSheet } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -7,16 +8,18 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const CustomHeader = () => {
     const { top } = useSafeAreaInsets();
-   
+    const router = useRouter();
     return (
         <BlurView
             intensity={80}
             tint='extraLight'
             style={{ padding: top }}>
             <View style={[inStyles.container]}>
-                <TouchableOpacity style={inStyles.roundBtn}>
+                <Link href="/(authenticated)/(modals)/account" asChild>
+                <TouchableOpacity style={inStyles.roundBtn} >
                     <Text style={[{ color: 'white', fontSize: 16, fontWeight: '500' }]}>NS</Text>
                 </TouchableOpacity>
+                </Link>
                 <View style={inStyles.searchSection}>
                     <Ionicons style={inStyles.searchIcon} name="search" size={24} />
                     <TextInput style={inStyles.input}

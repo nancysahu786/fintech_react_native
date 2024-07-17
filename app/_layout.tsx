@@ -13,8 +13,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
 import * as SecureStore from 'expo-secure-store';
-const CLERK_PUBLISHER_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+// const CLERK_PUBLISHER_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const CLERK_PUBLISHER_KEY = "pk_test_c2tpbGxlZC1tYW1tb3RoLTg3LmNsZXJrLmFjY291bnRzLmRldiQ";
 import {QueryClient,QueryClientProvider} from "@tanstack/react-query";
+import { UserInactivityProvider } from '@/context/userInactivity';
+import { StripeProvider } from '@stripe/stripe-react-native';
 const queryClient = new QueryClient();
 
 
@@ -153,6 +156,14 @@ const InitialLayout = () => {
       </View>
     )
  }} />
+ <Stack.Screen name="(authenticated)/(modals)/lock" options={{ headerShown:false,animation:'none' }} />
+ <Stack.Screen name="(authenticated)/(modals)/account" options={{presentation:'transparentModal',
+  animation:'fade',title:'',headerTransparent:true,
+  headerLeft: () => (
+    <TouchableOpacity onPress={Router.back}>
+      <Ionicons name="close-outline" size={30} color={'white'} />
+    </TouchableOpacity>),
+  }} />
     </Stack>
   )
 
@@ -162,10 +173,15 @@ const RootLayoutNav = () => {
   return (
     <ClerkProvider publishableKey={CLERK_PUBLISHER_KEY!} tokenCache={tokenCache}>
       <QueryClientProvider client={queryClient}>
+        <UserInactivityProvider>
+        <StripeProvider publishableKey='pk_test_51PcOMjRxXTmQy86Asl8fb0ZQLyqRxr0NbUTSMTNj4yBLZqP5TQJne6bAQP0wJB5z2LPd41RR73U1Nt3B8PM8wulL003eSQmNVl'>
+
     <GestureHandlerRootView>
       <StatusBar style='light' />
       <InitialLayout />
     </GestureHandlerRootView>
+    </StripeProvider>
+    </UserInactivityProvider>
     </QueryClientProvider>
     </ClerkProvider>
 
